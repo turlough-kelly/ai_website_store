@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="~{fragments/head :: head(title='Product')}">
+    <title>Product</title>
+</head>
+
+<body>
+    <div class="container">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+    </div>
+    <table class="center">
+        <tr>
+            <th>Photo</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Trained Price</th>
+            <th>Untrained Price</th>
+        </tr>
+        <td><img style="height: 250px; width: auto; display: block; margin-left: auto; margin-right: auto;" th:src="@{/bot-images/{image}(image=${product.image})}" th:alt="'Model' + ${product.name} + 'image'"></td>
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${product.trainedPrice}"></td>
+        <td th:text="${product.untrainedPrice}"></td>
+    </table>
+    <a style="text-align: center; color: goldenrod; display: block; padding-top: 50px" href="/admin/products">Return to product view</a>
+</body>
+
+</html>

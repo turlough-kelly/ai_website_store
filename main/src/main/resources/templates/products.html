@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/head :: head(title='Models')}">
+    <title>Models</title>
+</head>
+
+<body>
+    <div class="center">
+        <div class="container">
+            <div th:replace="~{fragments/navbar :: navbar}"></div>
+        </div>
+        <h1 class="white">Products <br> </h1>
+        <table class="center">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Trained Price</th>
+                    <th>Untrained Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product : ${products}">
+                    <td><img th:src="@{/bot-images/{image}(image=${product.image})}" width="100vw"
+                            th:alt="${product.name} + ' image'"></td>
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.trainedPrice}"></td>
+                    <td th:text="${product.untrainedPrice}"></td>
+                    <td><a th:href="@{/view/{id}(id=${product.id})}"><button>View model</button></a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div
+            th:replace="~{fragments/pagination :: pagination(page=${products}, pageNumbers=${pageNumbers}, url='/products')}">
+        </div>
+    </div>
+</body>
+
+</html>

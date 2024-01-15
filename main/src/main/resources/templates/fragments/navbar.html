@@ -1,0 +1,40 @@
+<nav th:fragment="navbar" class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img src="other/logo.png" width="125vw" alt="Logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products">A.I. Models</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                        data-bs-toggle="dropdown">
+                        <span sec:authentication="name"></span>
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/user"><i class="fa-solid fa-address-card"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="/cart"><i class="fa-solid fa-cart-shopping"></i>Cart</a></li>
+                        <li><a class="dropdown-item" href="/user/orders"><i class="fa-solid fa-folder-open"></i>Order history</a></li>
+                        <li sec:authorize="hasRole('ADMIN')"><a class="dropdown-item" href="/admin"><i class="fa-solid fa-lock"></i>Admin</a></li>
+                        <li><a class="dropdown-item" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>Log out</a></li>
+                    </ul>
+                </li>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="nav-link" href="/login">Log in</a>
+                </li>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="nav-link" href="/register">Sign up</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

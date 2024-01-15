@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/head :: head(title='Order Successful')}">
+    <title>Order Successful</title>
+</head>
+
+<body>
+<img style="text-align: center; margin-left: auto; margin-right: auto; display: block; width: 50%" src="/other/logo.png">
+    <h1 class="white" style="text-align: center">Order success!</h1>
+<p style="text-align: center; color: white">Thank you for shopping at The A.I Marketplace!</p>
+    <h2 style="color: white; font-family: 'Bell MT'; text-align: center">Your order reference: <span th:text="${order.id}"></span></h2>
+    <br>
+    <a style="text-align: center; display: block; color: gold" href="user/orders">View your orders here</a>
+</body>
+
+</html>

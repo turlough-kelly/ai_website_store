@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/head :: head(title='Orders')}">
+    <title>Orders</title>
+</head>
+
+<body>
+    <div class="center">
+        <div class="container">
+            <div th:replace="~{fragments/navbar :: navbar}"></div>
+        </div>
+        <h1 class="white">Your orders <br> </h1>
+        <table class="center">
+            <thead>
+                <tr>
+                    <th>Order id</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.id}"></td>
+                    <td th:text="${order.total}"></td>
+                    <td th:text="${order.status}"></td>
+                    <td><a th:href="@{order/{id}(id=${order.id})}"><button>View order</button></a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div
+            th:replace="~{fragments/pagination :: pagination(page=${orders}, pageNumbers=${pageNumbers}, url='/orders')}">
+        </div>
+    </div>
+</body>
+
+</html>

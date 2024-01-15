@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/head :: head(title='Users')}">
+    <title>Users</title>
+</head>
+
+<body>
+    <div class="container">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+    </div>
+    <h1 class="white" style="text-align: center">Users <br> </h1>
+
+    <table class="center">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Firstname</th>
+                <th>Surname</th>
+                <th>Email Address</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.firstname}"></td>
+                <td th:text="${user.surname}"></td>
+                <td th:text="${user.emailAddress}"></td>
+                <td th:text="${user.role}"></td>
+                <td>
+                    <a th:href="@{/admin/user/{id}(id=${user.id})}"><button>View User</button></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div
+    th:replace="~{fragments/pagination :: pagination(page=${users}, pageNumbers=${pageNumbers}, url='/admin/users')}">
+</div>
+
+</body>
+
+</html>

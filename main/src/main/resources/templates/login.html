@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/head :: head(title='Login')}">
+	<title>Login</title>
+</head>
+
+<body>
+	<div class="container">
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+	</div>
+	<div class="container text-center">
+		<h1 class="white">Login</h1>
+		<form th:href="@{/login}" method="post">
+			<fieldset>
+				<legend style="color: white">Please Login</legend>
+				<div th:if="${param.error}" class="alert alert-danger">
+					Invalid username and password.
+				</div>
+				<div th:if="${param.logout}" class="alert alert-success">
+					You have been logged out.
+				</div>
+				<label for="username" style="color: white">Username:</label>
+				<input type="text" id="username" name="username" required>
+				<br>
+				<label for="password" style="color: white">Password:</label>
+				<input type="password" id="password" name="password" required>
+				<br>
+				<button type="submit" class="button">Log in</button>
+			</fieldset>
+		</form>
+		<h3 style="color: white"><a th:href="@{/register}">Not registered? Sign up here!</a></h3>
+	</div>
+</body>
+
+</html>

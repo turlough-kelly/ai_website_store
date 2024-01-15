@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="~{fragments/head :: head(title='Edit Product')}">
+    <title>Edit Product</title>
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+</div>
+    <table class="center">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Trained Price</th>
+            <th>Untrained Price</th>
+        </tr>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${product.trainedPrice}"></td>
+        <td th:text="${product.untrainedPrice}"></td>
+        </tr>
+    </table>
+    <br>
+    <h1 class="white" style="text-align: center">Edit model details</h1>
+    <table style="margin-left: auto; margin-right: auto">
+        <tr>
+            <td>
+                <form action="/edit" method="POST" modelAttribute="ProductModel">
+                    <input type="hidden" name="id" th:value="${product.id}" />
+                    <label for="description">Description</label>
+                    <input class="users" type="text" id="description" name="description" th:value="${product.description}">
+                    <label for="trainedPrice">Trained Price:</label>
+                    <input class="users" type="number" id="trainedPrice" name="trainedPrice" th:value="${product.trainedPrice}">
+                    <label for="untrainedPrice">Untrained Price:</label>
+                    <input class="users" type="number" id="untrainedPrice" name="untrainedPrice" th:value="${product.untrainedPrice}">
+                    <button class="button" type=“submit” name="submit">Submit</button>
+                </form>
+            </td>
+    </table>
+</body>
+
+</html>

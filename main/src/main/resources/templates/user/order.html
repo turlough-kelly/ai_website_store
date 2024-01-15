@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="~{fragments/head :: head(title='Order')}">
+    <title>Order</title>
+</head>
+
+<body>
+    <div class="container">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+    </div>
+
+    <h1 class="white" style="text-align: center">Order View</h1>
+    <table style="margin-left: auto; margin-right: auto; padding-bottom: 50px">
+        <tr>
+            <th>Order ID</th>
+            <th>Order Total</th>
+            <th>Status</th>
+            <th>User</th>
+        </tr>
+        <tr>
+            <td style="padding-right: 10px"><span th:text="${order.id}"></span></td>
+            <td style="padding-right: 10px"><span th:text="${order.total}"></span></td>
+            <td style="padding-right: 10px"><span th:text="${order.status}"></span></td>
+            <td style="padding-right: 10px"><span th:text="${order.account.username}"></span></td>
+        </tr>
+    </table>
+<div style="padding-top: 100px">
+
+    <h1 class="white" style="text-align: center">Order Contents</h1>
+    <table style="margin-left: auto; margin-right: auto; padding-top: 100px">
+        <tr>
+            <th>Product Name</th>
+            <th>Trained?</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+        <tr th:each="item:${order.orderItems}">
+            <td th:text="${item.product.name}"></td>
+            <td th:text="${item.trained}"></td>
+            <td th:text="${item.amount}"></td>
+            <td th:text="${item.price}"></td>
+        </tr>
+        <tr>
+            <td>
+                <form th:action="@{/user/order/{id}(id=${order.id})}" th:method="delete" style="text-align: center;">
+                    <button class="button" type="submit">Cancel order</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+
+</html>

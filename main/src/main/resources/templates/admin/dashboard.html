@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/head :: head(title='Admin Dashboard')}">
+    <title>Admin Dashboard</title>
+</head>
+
+<body>
+    <div class="container">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+    </div>
+
+    <h1 class="white" style="text-align: center">Admin actions</h1>
+<table style="margin-left: auto; margin-right: auto">
+    <tr>
+        <td>
+            <form action="/admin/users">
+                <button class="button" type="submit">Users</button>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form action="/admin/products">
+                <button class="button" type="submit">Products</button>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form action="/admin/orders">
+                <button class="button" type="submit">Orders</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+
+</html>

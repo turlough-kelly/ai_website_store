@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/head :: head(title='Register')}">
+	<title>Register</title>
+</head>
+
+<body>
+	<div class="container">
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+	</div>
+	<div style="color: white; text-align: center">
+	<h1>User Registration</h1>
+	<form th:action="@{/register}" th:object="${account}" method="post">
+		<div th:switch="${error}" class="alert alert-danger">
+			<p th:case="'username'">Please use a different username.</p>
+			<p th:case="'email'">Please use a different email address.</p>
+		</div>
+		<label for="firstname">First name:</label>
+		<input class="users" type="text" id="firstname" name="firstname" th:field="*{firstname}" required>
+		<br>
+		<label for="surname">Surname:</label>
+		<input class="users" type="text" id="surname" name="surname" th:field="*{surname}" required>
+		<br>
+		<label for="emailAddress">Email:</label>
+		<input class="users" type="email" id="emailAddress" name="emailAddress" th:field="*{emailAddress}" required>
+		<br>
+		<label for="username">Username:</label>
+		<input class="users" type="text" id="username" name="username" th:field="*{username}" minlength="4" required>
+		<br>
+		<label for="password">Password:</label>
+		<input class="users" type="password" id="password" name="password" th:field="*{password}" minlength="8" required>
+		<br>
+		<button type="submit" class="button">Register</button>
+	</form>
+	</div>
+</body>
+
+</html>

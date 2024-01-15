@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="~{fragments/head :: head(title='Cart')}">
+    <title>Cart</title>
+</head>
+
+<body>
+    <div class="container">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+    </div>
+    <h1 class="white" style="text-align: center">Your Cart</h1>
+    <div class="white">
+        <table style="margin-left: auto; margin-right: auto;">
+            <thead>
+                <tr>
+                    <th>Name </th>
+                    <th>Price</th>
+                    <th style="padding-right: 50px">Quantity</th>
+                    <th>Trained?</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${cart}">
+                    <td th:text="${item.product.name}" style="padding-right: 50px"></td>
+                    <td th:text="${item.price}" style="padding-right: 50px"></td>
+                    <td th:text="${item.amount}" style="padding-right: 50px"></td>
+                    <td th:text="${item.trained}"></td>
+                    <td>
+                        <form action="/cart" method="POST">
+                            <input type="hidden" name="_method" value="patch">
+                            <input type="hidden" name="id" th:value="${item.id}">
+                            <label for="Trainedamount">Enter quantity of items:</label>
+                            <input type="number" id="Trainedamount" name="amount" th:value="${item.amount}" min="1">
+                            <button class="button" type=“submit” name="submit">Update amount</button>
+                        </form>
+                        <form action="/cart" method="POST">
+                            <input type="hidden" name="_method" value="delete">
+                            <input type="hidden" name="productId" th:value="${item.product.id}">
+                            <input type="hidden" name="isTrained" th:value="${item.trained}">
+                            <button class="button" type=“submit” name="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="white" style="text-align: center;">
+            <p>Total:</p>
+            <p th:text="${totalPrice}"></p>
+    </div>
+    <br>
+    <div style="text-align: center">
+        <a href="/checkout"><button class="button">Proceed to checkout</button></a>
+        <a href="/products"><button class="button">Return to products view</button></a>
+    </div>
+</body>
+
+</html>

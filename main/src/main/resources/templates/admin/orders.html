@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/head :: head(title='Orders')}">
+    <title>Orders</title>
+</head>
+
+<body>
+    <div class="center">
+        <div class="container">
+            <div th:replace="~{fragments/navbar :: navbar}"></div>
+        </div>
+        <h1 class="white">All orders <br> </h1>
+        <table class="center">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Price paid </th>
+                    <th>Status</th>
+                    <th>User</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.id}"></td>
+                    <td th:text="${order.total}"></td>
+                    <td th:text="${order.status}"></td>
+                    <td th:text="${order.account.username}"></td>
+                    <td>
+                        <form id="order status" th:action="@{/admin/order/{id}(id=${order.id})}" method="POST"
+                            th:if="${order.status.name() != 'SHIPPED' && order.status.name() != 'CANCELLED'}">
+                            <label for="status-select">Order Status:</label>
+                            <select id="status-select" name="status">
+                                <option value="CONFIRMED" th:attr="selected=${order.status.name() == 'CONFIRMED'}?true">Confirmed</option>
+                                <option value="CANCELLED" th:attr="selected=${order.status.name() == 'CANCELLED'}?true">Cancelled</option>
+                                <option value="PENDING" th:attr="selected=${order.status.name() == 'PENDING'}?true">Pending</option>
+                                <option value="SHIPPED" th:attr="selected=${order.status.name() == 'SHIPPED'}?true">Shipped</option>
+                            </select>
+                            <button type="submit">Confirm Status</button>
+                        </form>
+                        <a th:href="@{/admin/order/{id}(id=${order.id})}"><button>View order</button></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div
+            th:replace="~{fragments/pagination :: pagination(page=${orders}, pageNumbers=${pageNumbers}, url='/admin/orders')}">
+        </div>
+    </div>
+</body>
+
+</html>

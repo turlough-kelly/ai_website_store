@@ -1,0 +1,10 @@
+<ul th:fragment="pagination(page, pageNumbers, url)" th:if="${page.totalPages > 0}" class="pagination justify-content-center">
+    <li class="page-item"><a class="page-link" th:classappend="${page.number==0} ? disabled" th:href="@{${url}(page=0)}"><i class="fa-solid fa-angles-left"></i></a></li>
+    <li class="page-item"><a class="page-link" th:classappend="${page.number==0} ? disabled" th:href="@{${url}(page=${page.number - 1})}"><i class="fa-solid fa-angle-left"></i></a></li>
+    <th:block th:each="pageNumber : ${pageNumbers}">
+        <li class="page-item"><a class="page-link" th:href="@{${url}(page=${pageNumber - 1})}" th:text=${pageNumber}
+            th:classappend="${pageNumber==page.number + 1} ? active"></a></li>
+    </th:block>
+    <li class="page-item"><a class="page-link" th:classappend="${page.number==pageNumbers.get(pageNumbers.size() - 1) - 1} ? disabled" th:href="@{${url}(page=${page.number + 1})}"><i class="fa-solid fa-angle-right"></i></a></li>
+    <li class="page-item"><a class="page-link" th:classappend="${page.number==pageNumbers.get(pageNumbers.size() - 1) - 1} ? disabled" th:href="@{${url}(page=${pageNumbers.get(pageNumbers.size() - 1) - 1})}"><i class="fa-solid fa-angles-right"></i></a></li>
+</ul>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="~{fragments/head :: head(title='My Profile')}">
+    <title>My Profile</title>
+</head>
+
+<body>
+    <div class="container">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+    </div>
+
+    <h1 class="white" style="text-align: center">User Profile</h1>
+        <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+            </tr>
+            <tr>
+                <td><span th:text="${user.username}"></span></td>
+                <td><span th:text="${user.firstname}"></span></td>
+                <td><span th:text="${user.surname}"></span></td>
+                <td><span th:text="${user.emailAddress}"></span></td>
+            </tr>
+        </table>
+
+    <h1 class="white" style="text-align: center; padding-top: 50px">Change Details</h1>
+    <div class="triple">
+        <div>
+            <form action="/user/update" method="POST">
+                <label for="username">Username</label>
+                <input class="users" type="text" id="username" name="username">
+                <button class="button" type="submit" name="submit">Change username</button>
+            </form>
+        </div>
+        <div>
+            <form action="/user/update" method="POST">
+                <label for="password">Password</label>
+                <input class="users" type="text" id="password" name="password">
+                <button class="button" type="submit" name="submit">Change password</button>
+            </form>
+        </div>
+    </div>
+    
+</body>
+
+</html>

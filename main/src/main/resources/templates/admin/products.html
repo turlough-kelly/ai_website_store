@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/head :: head(title='Products')}">
+    <title>Products</title>
+</head>
+
+<body>
+    <div class="container">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+    </div>
+    <h1 class="white" style="text-align: center">Products <br> </h1>
+
+    <h2 style="text-align: center; color: white">Add a Product</h2>
+    <div style="display: block; text-align: center; color: white">
+        <form style="text-align: left; display: inline-block; margin-left: auto; margin-right: auto" action="/admin/product" method="POST">
+            <label for="name">Product Name:</label>
+            <input type="text" id="name" name="name">
+            <label for="description">description</label>
+            <input type="text" id="description" name="description">
+            <label for="trainedPrice">Trained Price:</label>
+            <input type="number" id="trainedPrice" name="trainedPrice">
+            <label for="untrainedPrice">Untrained Price:</label>
+            <input type="number" id="untrainedPrice" name="untrainedPrice">
+            <button class="button" type="submit" name="submit">Submit</button>
+        </form>
+    </div>
+
+    <table class="center">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+                <th>Trained Price</th>
+                <th>Untrained Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.trainedPrice}"></td>
+                <td th:text="${product.untrainedPrice}"></td>
+                <td>
+                    <a th:href="@{/admin/product/{id}(id=${product.id})}"><button>View model</button></a>
+                    <a th:href="@{/edit/{id}(id=${product.id})}"><button>Edit model details</button></a>
+                    <a th:if="${product.hidden}" th:href="@{product/show/{id}(id=${product.id})}"><button>Show
+                            model</button></a>
+                    <a th:unless="${product.hidden}" th:href="@{product/hide/{id}(id=${product.id})}"><button>Hide
+                            model</button></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div
+        th:replace="~{fragments/pagination :: pagination(page=${products}, pageNumbers=${pageNumbers}, url='/admin/products')}">
+    </div>
+
+</body>
+
+</html>

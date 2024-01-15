@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="~{fragments/head :: head(title='User')}">
+    <title>User</title>
+</head>
+
+<body>
+    <div class="container">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+    </div>
+    <table style="margin-left: auto; margin-right: auto;">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Promote User</th>
+            <th>Demote User</th>
+        </tr>
+        <tr>
+            <td><span th:text="${user.id}"></span></td>
+            <td><span th:text="${user.username}"></span></td>
+            <td><span th:text="${user.firstname}"></span></td>
+            <td><span th:text="${user.surname}"></span></td>
+            <td><span th:text="${user.emailAddress}"></span></td>
+            <td><span th:text="${user.role}"></span></td>
+            <td><a th:href="@{/admin/user/promote/{id}(id=${user.id})}"><button class="button" th:appendclass="${user.role.name() != 'OWNER'} ? disabled">Promote User</button></a></td>
+            <td><a th:href="@{/admin/user/demote/{id}(id=${user.id})}"><button class="button" th:appendclass="${user.role.name() == 'ADMIN'} ? disabled">Demote User</button></a></td>
+        </tr>
+    </table>
+
+    <h1 class="white" style="text-align: center; padding-top: 50px">Orders</h1>
+    <table class="center">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Price paid </th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="order : ${user.orders}">
+                <td th:text="${order.id}"></td>
+                <td th:text="${order.total}"></td>
+                <td th:text="${order.status}"></td>
+                <td><a th:href="@{/admin/order/{id}(id=${order.id})}"><button>View order</button></a></td>
+            </tr>
+        </tbody>
+    </table>
+    <a style="text-align: center; color: goldenrod; display: block; padding-top: 50px" href="/admin/users">Return to user view</a>
+</body>
+
+</html>
